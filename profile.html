@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support and Help Department</title>
+    <link rel="website icon" type="png" href="images/OIG2.jpg">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background: linear-gradient(45deg, #000, #444);
+            font-family: Arial, sans-serif;
+        }
+
+        .circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 20px 0;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .circle:hover {
+            transform: scale(1.1);
+        }
+
+        .circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .modal p {
+            margin: 0 0 20px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .modal button {
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .modal button:hover {
+            background: #0056b3;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .overlay.show,
+        .modal.show {
+            display: block;
+        }
+    </style>
+    <script>
+        function showModal(message, link) {
+            const modal = document.getElementById('modal');
+            const overlay = document.getElementById('overlay');
+            const modalMessage = document.getElementById('modal-message');
+
+            modalMessage.textContent = message;
+            modal.classList.add('show');
+            overlay.classList.add('show');
+
+            document.getElementById('navigate-button').onclick = () => {
+                window.location.href = link;
+            };
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            const overlay = document.getElementById('overlay');
+            
+            modal.classList.remove('show');
+            overlay.classList.remove('show');
+        }
+    </script>
+</head>
+<body>
+    <!-- الدائرة الأولى -->
+    <div class="circle" onclick="showModal('عند الضغط على  هذه الدائرة سترسلك الى صفحتي بالفيسبوك وعند مراسلتي قم بقول لي انني جئتك من الموقع الخاص بك ،. لكي افهمك', 'https://www.facebook.com/profile.php?id=100090476345986')">
+        <img src="https://th.bing.com/th/id/OIP.uEO1Nf3WCmXjRCiACXzqpAHaHr?w=1458&h=1512&rs=1&pid=ImgDetMain" alt="Example 1">
+    </div>
+
+    <!-- الدائرة الثانية -->
+    <div class="circle" onclick="showModal('عند الضغط على  هذه الدائرة سترسلك الى صفحتي بالتويتر وعند مراسلتي قم بقول لي انني جئتك من الموقع الخاص بك ،. لكي افهمك', 'https://x.com/ChawiRajaa33737')">
+        <img src="https://th.bing.com/th/id/OIP.7VRRlhhpqXtDSxhfL-BkzAHaG0?w=851&h=784&rs=1&pid=ImgDetMain" alt="Example 2">
+    </div>
+
+    <!-- الدائرة الثالثة -->
+    <div class="circle" onclick="showModal('عند الضغط على  هذه الدائرة سترسلك الى صفحتي بالإنستغرام وعند مراسلتي قم بقول لي انني جئتك من الموقع الخاص بك ،. لكي افهمك', 'https://www.instagram.com/maxhmanim/')">
+        <img src="https://th.bing.com/th/id/R.39a0355324b566addd5b8ced6ee2bd12?rik=1Ztogg%2b4ON9nIQ&pid=ImgRaw&r=0" alt="Example 3">
+    </div>
+
+    <!-- نافذة الملاحظات -->
+    <div id="overlay" class="overlay" onclick="closeModal()"></div>
+    <div id="modal" class="modal">
+        <p id="modal-message">محتوى الملاحظة</p>
+        <button id="navigate-button">اذهب</button>
+    </div>
+</body>
+</html>

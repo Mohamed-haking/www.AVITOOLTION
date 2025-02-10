@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dark Web AVITOOLYION Store</title>
+    <link rel="website icon" type="png" href="OIG2.jpg" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: linear-gradient(135deg, #000000, #ff0000);
+        color: white;
+        position: relative;
+      }
+
+      .container {
+        text-align: center;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        background-color: #ff1717;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+      }
+
+      .btn:hover {
+        background-color: #ee1919;
+      }
+
+      /* نافذة التعليمات */
+      .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .popup-content {
+        background: white;
+        color: black;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .popup-content h2 {
+        margin-bottom: 10px;
+      }
+
+      .popup-content p {
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .popup-content button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #ff1717;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .popup-content button:hover {
+        background-color: #ee1919;
+      }
+
+      #passwordPage {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #ff0000, #000000);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        flex-direction: column;
+      }
+
+      input {
+        padding: 10px;
+        width: 80%;
+        max-width: 300px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        transition: box-shadow 0.3s ease;
+      }
+
+      input:focus {
+        box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        border-color: #ff0000;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #000000;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s;
+      }
+
+      button:hover {
+        background-color: #ff0000;
+        transform: scale(1.05);
+      }
+
+      .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- نافذة التعليمات -->
+    <div class="popup" id="instructionsPopup" onclick="closePopup()">
+      <div class="popup-content" onclick="event.stopPropagation()">
+        <h2>تعليمات تسجيل الدخول</h2>
+        <p>
+          اذهب عند ذلك الشخص الذي اهدى لك هذا الموقع وقل له ان يهديك كلمة السر
+          الموقع <br />- للدخول إلى الموقع: <br />- اضغط على الزر "اضغط هنا".
+          <br />- أدخل كلمة المرور الصحيحة. <br />- سيتم توجيهك للصفحة الرئيسية
+          بعد النجاح.
+        </p>
+        <button onclick="closePopup()">إغلاق</button>
+      </div>
+    </div>
+
+    <!-- الصفحة الأولى -->
+    <div class="container" id="welcomePage">
+      <h1>مرحبًا بكم في الدارك ويب</h1>
+      <p>اضغط على الزر أدناه للدخول إلى الموقع</p>
+      <button class="btn" onclick="showPasswordPage()">اضغط هنا</button>
+    </div>
+
+    <!-- واجهة كلمة المرور -->
+    <div id="passwordPage">
+      <h1>Protected Page By Logging In</h1>
+      <p>الرجاء إدخال كلمة المرور للمتابعة:</p>
+      <input type="password" id="password" placeholder="Enter Password" />
+      <button onclick="checkPassword()">Submit</button>
+      <p id="error-message" class="error"></p>
+    </div>
+
+    <script>
+      // عرض واجهة كلمة المرور
+      function showPasswordPage() {
+        document.getElementById("welcomePage").style.display = "none"; // إخفاء الصفحة الأولى
+        document.getElementById("passwordPage").style.display = "flex"; // عرض واجهة كلمة المرور
+      }
+
+      // التحقق من كلمة المرور
+      function checkPassword() {
+        const password = document.getElementById("password").value;
+        const correctPassword = "AVT-avitooltion-666";
+
+        if (password === correctPassword) {
+          document.body.style.opacity = "0";
+          setTimeout(() => {
+            window.location.href = "Welcome.html"; // الانتقال إلى الصفحة الرئيسية
+          }, 500);
+        } else {
+          const errorMessage = document.getElementById("error-message");
+          errorMessage.textContent = "كلمة المرور خاطئة. حاول مرة أخرى.";
+        }
+      }
+
+      // إغلاق نافذة التعليمات
+      function closePopup() {
+        document.getElementById("instructionsPopup").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

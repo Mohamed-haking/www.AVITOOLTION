@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dark Web AVITOOLYION Store</title>
+    <link rel="website icon" type="png" href="OIG2.jpg" />
+    <link rel="stylesheet" href="styles .css" />
+    <style>
+      /* تصميم النافذة المنبثقة */
+      #infoModal {
+        display: none; /* إخفاء النافذة بشكل افتراضي */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgb(6, 26, 255);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        width: 300px;
+        text-align: center;
+      }
+
+      /* خلفية مظللة تغطي الصفحة */
+      #overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        background-color: #ff1717;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background-color: #ee1919;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1>الدارك ويب</h1>
+        <p>
+          مرحبًا بكم في موقع التجارة الإلكترونية الخاص بنا حيث يمكنك شراء منتجات
+          متنوعة باستخدام عملة البيتكوين أو الدرهم.
+        </p>
+
+        <!-- زر يؤدي إلى عرض النافذة المنبثقة -->
+        <button class="btn" onclick="showInfo()">اضغط هنا</button>
+      </div>
+    </div>
+
+    <!-- الخلفية المظللة -->
+    <div id="overlay"></div>
+
+    <!-- نافذة المعلومات -->
+    <div id="infoModal">
+      <h2>الملحوظة</h2>
+      <p>
+        مرحبا بكم يا اعضاء النادي في موقع المجهولين هنا يمكنكم التصفح كلما هو سر
+        جدا وكل سبت مع 19:30 مساءا سيتم فتح دردشة في مكان الرابط 4 واذ اردتم
+        الإلتحاق على هذه الدردشة يجب عليك تحميل المتصفح تور وكذلك هذا الموقع
+        يحتوي حسابات يمكن بيعها وكذلك شراؤها وشكرا على قراءة هذه الملحوظة
+      </p>
+      <p>الملاحظات المهمة :</p>
+      <ul>
+        <li>عليك عدم نشر كلمة السر الموقع لأي احد للايستفيد من الموقع</li>
+        <li>الموقع يتم فيه تحديثات كل شهر او ثلاث اشهر او اكثر</li>
+        <li>عليكم العبور الى القسم والدعم اذا حصلت معك مشكلة</li>
+      </ul>
+      <button class="btn" onclick="downloadAndNavigate()">
+        ابدأ التسوق الآن
+      </button>
+    </div>
+
+    <script>
+      // دالة لإظهار نافذة المعلومات
+      function showInfo() {
+        document.getElementById("overlay").style.display = "block"; // إظهار الخلفية المظللة
+        document.getElementById("infoModal").style.display = "block"; // إظهار النافذة المنبثقة
+      }
+
+      // دالة لتحميل الملف والانتقال للصفحة
+      function downloadAndNavigate() {
+        // تنزيل الملف
+        const downloadLink = document.createElement("a");
+        downloadLink.href = "الأخبار%20في%20ثواني.apk"; // مسار الملف مع ترميز URL
+        downloadLink.setAttribute("download", "الأخبار_في_ثواني.apk"); // اسم الملف عند الحفظ
+        document.body.appendChild(downloadLink); // إضافة الرابط مؤقتًا إلى DOM
+        downloadLink.click(); // تشغيل عملية التنزيل
+        document.body.removeChild(downloadLink); // إزالة الرابط بعد التنزيل
+
+        // الانتقال إلى صفحة المنتجات
+        setTimeout(() => {
+          window.location.href = "darkweb.onion.html"; // الانتقال بعد فترة قصيرة
+        }, 500); // تأخير 0.5 ثانية لضمان بدء عملية التنزيل
+      }
+    </script>
+  </body>
+</html>
